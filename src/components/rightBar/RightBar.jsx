@@ -87,6 +87,36 @@ const RightBar = () => {
                             <span>Juan Dela Cruz</span>
                         </div>
                     </div>
+                    <div className="user">
+                        <div className="userInfo">
+                            <img
+                                src="https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                            />
+                            <div className="online" />
+                            <span>Juan Dela Cruz</span>
+                        </div>
+                    </div>
+                    <div className="user">
+                        <div className="userInfo">
+                            <img
+                                src="https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                            />
+                            <div className="online" />
+                            <span>Juan Dela Cruz</span>
+                        </div>
+                    </div>
+                    <div className="user">
+                        <div className="userInfo">
+                            <img
+                                src="https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                            />
+                            <div className="online" />
+                            <span>Juan Dela Cruz</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
