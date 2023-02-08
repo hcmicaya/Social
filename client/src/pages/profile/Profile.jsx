@@ -25,6 +25,36 @@ const Profile = () => {
         })
     );
 
+    const { isLoading: rIsLoading, data: relationshipData } = useQuery(
+        ["relationship"],
+        () =>
+            makeRequest
+                .get("/relationships?followedUserId=" + userId)
+                .then((res) => {
+                    return res.data;
+                })
+    );
+
+    const queryClient = useQueryClient();
+    // Mutations
+    const mutation = useMutation(
+        (following) => {
+            if (following)
+                return makeRequest.delete("/relationships?userId=" + userId);
+            return makeRequest.post("/relationships", { userId });
+        },
+        {
+            onSuccess: () => {
+                // Invalidate and refetch
+                queryClient.invalidateQueries(["relationship"]);
+            },
+        }
+    );
+
+    const handleFollow = () => {
+        mutation.mutate(relationshipData.includes(currentUser.id));
+    };
+
     return (
         <div className="profile">
             {isLoading ? (
@@ -70,10 +100,18 @@ const Profile = () => {
                                         <span>{data.website}</span>
                                     </div>
                                 </div>
-                                {userId == currentUser.id ? (
+                                {rIsLoading ? (
+                                    "loading"
+                                ) : userId == currentUser.id ? (
                                     <button>Update</button>
                                 ) : (
-                                    <button>Follow</button>
+                                    <button onClick={handleFollow}>
+                                        {relationshipData.includes(
+                                            currentUser.id
+                                        )
+                                            ? "Following"
+                                            : "Follow"}
+                                    </button>
                                 )}
                             </div>
                             <div className="right">
@@ -81,7 +119,7 @@ const Profile = () => {
                                 <MoreVertIcon />
                             </div>
                         </div>
-                        <Posts />
+                        <Posts userId={userId} />
                     </div>
                 </>
             )}
